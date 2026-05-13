@@ -35,7 +35,7 @@ const COUNTRIES = [
   'Yemen','Zambia','Zimbabwe',
 ]
 
-export default function FormSearchSelect({ label, name, value, onChange }) {
+export default function FormSearchSelect({ label, name, value, onChange, disabled = false }) {
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState('')
   const containerRef = useRef(null)
@@ -64,6 +64,7 @@ export default function FormSearchSelect({ label, name, value, onChange }) {
   }
 
   function handleToggle() {
+    if (disabled) return
     setOpen(prev => {
       if (!prev) setTimeout(() => inputRef.current?.focus(), 10)
       else setQuery('')
@@ -84,7 +85,7 @@ export default function FormSearchSelect({ label, name, value, onChange }) {
 
       {/* Trigger */}
       <div
-        className={`search-select-trigger form-input${open ? ' search-select-trigger--open' : ''}`}
+        className={`search-select-trigger form-input${open ? ' search-select-trigger--open' : ''}${disabled ? ' form-input--disabled' : ''}`}
         onClick={handleToggle}
         role="combobox"
         aria-expanded={open}

@@ -1,4 +1,4 @@
-export default function FormInput({ label, name, value, onChange, type = 'text', placeholder = '' }) {
+export default function FormInput({ label, name, value, onChange, type = 'text', placeholder = '', disabled = false }) {
   return (
     <div className="form-field">
       <label className="form-label" htmlFor={name}>{label}</label>
@@ -9,7 +9,8 @@ export default function FormInput({ label, name, value, onChange, type = 'text',
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="form-input"
+        disabled={disabled}
+        className={`form-input${disabled ? ' form-input--disabled' : ''}`}
         autoComplete="off"
       />
     </div>

@@ -29,10 +29,27 @@ const INITIAL_FORM = {
 export default function App() {
   const [form, setForm] = useState(INITIAL_FORM)
   const [showPreview, setShowPreview] = useState(false)
+  const [sameAsBilling, setSameAsBilling] = useState(false)
 
   function handleChange(e) {
     const { name, value } = e.target
     setForm(prev => ({ ...prev, [name]: value }))
+    if (showPreview) setShowPreview(false)
+  }
+
+  function handleSameAsBilling(e) {
+    const checked = e.target.checked
+    setSameAsBilling(checked)
+    if (checked) {
+      setForm(prev => ({
+        ...prev,
+        shippingCustomerName: prev.billingCustomerName,
+        shippingAddress: prev.billingAddress,
+        shippingState: prev.billingState,
+        shippingPincode: prev.billingPincode,
+        shippingCountry: prev.billingCountry,
+      }))
+    }
     if (showPreview) setShowPreview(false)
   }
 
@@ -71,7 +88,7 @@ export default function App() {
             <div className="customer-groups">
 
               {/* Billing Customer */}
-              <div className="customer-group">
+              <div className="customer-group" id="billing-group">
                 <div className="customer-group-title">
                   <span className="group-dot group-dot--yellow" />
                   Billing Customer
@@ -116,8 +133,20 @@ export default function App() {
                 </div>
               </div>
 
+              {/* Same as billing checkbox — sits between the two groups */}
+              <label className="same-as-billing">
+                <input
+                  type="checkbox"
+                  checked={sameAsBilling}
+                  onChange={handleSameAsBilling}
+                  className="same-as-billing-checkbox"
+                />
+                <span className="same-as-billing-icon">⇄</span>
+                <span className="same-as-billing-text">Same as<br/>Billing</span>
+              </label>
+
               {/* Shipping Customer */}
-              <div className="customer-group">
+              <div className={`customer-group${sameAsBilling ? ' customer-group--locked' : ''}`}>
                 <div className="customer-group-title">
                   <span className="group-dot group-dot--black" />
                   Shipping Customer
@@ -129,6 +158,7 @@ export default function App() {
                     value={form.shippingCustomerName}
                     onChange={handleChange}
                     placeholder="Enter shipping customer name"
+                    disabled={sameAsBilling}
                   />
                   <FormInput
                     label="Address Line"
@@ -136,6 +166,7 @@ export default function App() {
                     value={form.shippingAddress}
                     onChange={handleChange}
                     placeholder="Street / locality / area"
+                    disabled={sameAsBilling}
                   />
                   <div className="address-row">
                     <FormSelect
@@ -143,6 +174,7 @@ export default function App() {
                       name="shippingState"
                       value={form.shippingState}
                       onChange={handleChange}
+                      disabled={sameAsBilling}
                     />
                     <FormInput
                       label="Pincode"
@@ -151,6 +183,7 @@ export default function App() {
                       value={form.shippingPincode}
                       onChange={handleChange}
                       placeholder="400001"
+                      disabled={sameAsBilling}
                     />
                   </div>
                   <FormSearchSelect
@@ -158,6 +191,7 @@ export default function App() {
                     name="shippingCountry"
                     value={form.shippingCountry}
                     onChange={handleChange}
+                    disabled={sameAsBilling}
                   />
                 </div>
               </div>

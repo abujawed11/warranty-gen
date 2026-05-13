@@ -8,7 +8,7 @@ const INDIAN_STATES = [
   'Delhi', 'Jammu & Kashmir', 'Ladakh', 'Lakshadweep', 'Puducherry',
 ]
 
-export default function FormSelect({ label, name, value, onChange }) {
+export default function FormSelect({ label, name, value, onChange, disabled = false }) {
   return (
     <div className="form-field">
       <label className="form-label" htmlFor={name}>{label}</label>
@@ -17,7 +17,8 @@ export default function FormSelect({ label, name, value, onChange }) {
         name={name}
         value={value}
         onChange={onChange}
-        className="form-input form-select"
+        disabled={disabled}
+        className={`form-input form-select${disabled ? ' form-input--disabled' : ''}`}
       >
         <option value="">— Select State —</option>
         {INDIAN_STATES.map(s => (
