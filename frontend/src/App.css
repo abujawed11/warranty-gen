@@ -591,6 +591,7 @@ input[type="number"] { -moz-appearance: textfield; }
 /* ── Preview section ──────────────────────────────────── */
 .preview-section {
   margin-top: 36px;
+  overflow-x: auto;  /* scroll horizontally on narrow screens */
 }
 
 .preview-section-header {
@@ -627,12 +628,18 @@ input[type="number"] { -moz-appearance: textfield; }
    ══════════════════════════════════════════════════════════ */
 .cert-preview {
   background: var(--white);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--gray-200);
+  box-shadow: 0 4px 32px rgba(0,0,0,.18);
+  border: 1px solid var(--gray-300, #d1d5db);
   overflow: hidden;
   font-family: 'Segoe UI', system-ui, Roboto, sans-serif;
   color: var(--black-soft);
+  font-size: 13.5px;
+
+  /* A4 at 96 dpi */
+  width: 794px;
+  min-height: 1123px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 /* ── Header ── */
@@ -644,7 +651,7 @@ input[type="number"] { -moz-appearance: textfield; }
 }
 
 .cp-header-left {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 3px;
   color: var(--black-soft);
@@ -652,7 +659,7 @@ input[type="number"] { -moz-appearance: textfield; }
 }
 
 .cp-header-logo {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 900;
   line-height: 1;
   letter-spacing: 1px;
@@ -671,7 +678,7 @@ input[type="number"] { -moz-appearance: textfield; }
 /* ── Certificate title ── */
 .cp-title {
   text-align: center;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 800;
   letter-spacing: 1px;
   color: var(--black-soft);
@@ -686,7 +693,7 @@ input[type="number"] { -moz-appearance: textfield; }
   margin: 0 32px 20px;
   border-collapse: collapse;
   border: 1px solid #aaa;
-  font-size: 13px;
+  font-size: 13.5px;
 }
 
 .cp-info-table tr {
@@ -698,8 +705,8 @@ input[type="number"] { -moz-appearance: textfield; }
 }
 
 .cp-info-label {
-  width: 200px;
-  padding: 9px 14px;
+  width: 220px;
+  padding: 10px 16px;
   font-weight: 700;
   color: var(--black-soft);
   vertical-align: top;
@@ -708,10 +715,10 @@ input[type="number"] { -moz-appearance: textfield; }
 }
 
 .cp-info-value {
-  padding: 9px 14px;
+  padding: 10px 16px;
   color: var(--black-soft);
   vertical-align: top;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .cp-multiline {
@@ -721,7 +728,7 @@ input[type="number"] { -moz-appearance: textfield; }
 /* ── Section heading (underlined, like PDF) ── */
 .cp-section-heading {
   margin: 0 32px 10px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 2px;
@@ -734,7 +741,7 @@ input[type="number"] { -moz-appearance: textfield; }
   margin: 0 32px 20px;
   border-collapse: collapse;
   border: 1px solid #aaa;
-  font-size: 13px;
+  font-size: 13.5px;
 }
 
 .cp-material-table thead tr {
@@ -742,23 +749,23 @@ input[type="number"] { -moz-appearance: textfield; }
 }
 
 .cp-mat-th {
-  padding: 8px 12px;
+  padding: 9px 14px;
   font-weight: 700;
   color: var(--black-soft);
   border: 1px solid #aaa;
   text-align: center;
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: .3px;
 }
 
 .cp-mat-th--num { width: 36px; }
 
 .cp-mat-td {
-  padding: 10px 12px;
+  padding: 10px 14px;
   border: 1px solid #aaa;
   color: var(--black-soft);
   vertical-align: top;
-  font-size: 13px;
+  font-size: 13.5px;
 }
 
 .cp-mat-td--center { text-align: center; }
@@ -766,9 +773,9 @@ input[type="number"] { -moz-appearance: textfield; }
 /* ── Terms ── */
 .cp-terms {
   margin: 0 32px 20px;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--black-soft);
-  line-height: 1.65;
+  line-height: 1.7;
 }
 
 .cp-terms p {
@@ -786,7 +793,7 @@ input[type="number"] { -moz-appearance: textfield; }
 }
 
 .cp-for-sunrack {
-  font-size: 13px;
+  font-size: 14px;
   color: #c8860a;
   font-style: italic;
   margin-bottom: 8px;
@@ -794,14 +801,14 @@ input[type="number"] { -moz-appearance: textfield; }
 
 .cp-signature-img {
   display: block;
-  height: 64px;
+  height: 72px;
   width: auto;
   margin-bottom: 6px;
   object-fit: contain;
 }
 
 .cp-auth-text {
-  font-size: 13px;
+  font-size: 13.5px;
   color: var(--black-soft);
 }
 
@@ -812,10 +819,11 @@ input[type="number"] { -moz-appearance: textfield; }
   padding: 10px 32px;
   display: flex;
   justify-content: space-between;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--black-soft);
   letter-spacing: .3px;
+  margin-top: auto;
 }
 
 /* keep this for backward compat if referenced anywhere */
