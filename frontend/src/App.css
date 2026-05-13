@@ -622,156 +622,207 @@ input[type="number"] { -moz-appearance: textfield; }
   color: var(--black);
 }
 
-/* ── Preview card ─────────────────────────────────────── */
-.preview-card {
+/* ══════════════════════════════════════════════════════════
+   CERTIFICATE PREVIEW  —  matches PDF layout exactly
+   ══════════════════════════════════════════════════════════ */
+.cert-preview {
   background: var(--white);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
-  overflow: hidden;
   border: 1px solid var(--gray-200);
+  overflow: hidden;
+  font-family: 'Segoe UI', system-ui, Roboto, sans-serif;
+  color: var(--black-soft);
 }
 
-.preview-header {
-  background: var(--black);
-  padding: 20px 32px;
+/* ── Header ── */
+.cp-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 4px solid var(--yellow);
+  padding: 18px 32px 14px;
 }
 
-.preview-logo-placeholder {
-  color: var(--yellow);
-  font-size: 22px;
-  font-weight: 900;
-  letter-spacing: 3px;
-}
-
-.preview-tagline {
-  color: rgba(255,255,255,.5);
-  font-size: 12px;
-  letter-spacing: .5px;
-  margin-top: 4px;
-}
-
-.preview-title {
-  color: var(--white);
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  text-align: right;
-}
-
-/* ── Preview customer groups ──────────────────────────── */
-.preview-customer-groups {
-  display: flex;
-  gap: 0;
-  border-bottom: 1px solid var(--gray-200);
-}
-
-.preview-customer-block {
-  flex: 1;
-  padding: 20px 28px;
-}
-
-.preview-customer-block:first-child {
-  border-right: 1px solid var(--gray-200);
-}
-
-.preview-customer-heading {
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .8px;
-  color: var(--gray-600);
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin-bottom: 8px;
-}
-
-.preview-customer-name {
+.cp-header-left {
   font-size: 15px;
   font-weight: 700;
+  letter-spacing: 3px;
   color: var(--black-soft);
-  margin-bottom: 4px;
-}
-
-.preview-customer-address {
-  font-size: 13px;
-  color: var(--gray-600);
-  line-height: 1.55;
-}
-
-.preview-customer-divider { display: none; }
-
-/* ── */
-.preview-section-title {
-  background: var(--yellow-light);
-  border-bottom: 2px solid var(--yellow);
-  padding: 10px 32px;
-  font-size: 12px;
-  font-weight: 800;
-  color: var(--black-soft);
-  letter-spacing: 1px;
   text-transform: uppercase;
 }
 
-/* ── Preview table ────────────────────────────────────── */
-.preview-table {
-  width: 100%;
+.cp-header-logo {
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 1px;
+}
+
+.cp-logo-sun { color: var(--black-soft); }
+.cp-logo-rack { color: var(--yellow); }
+
+/* ── Yellow divider ── */
+.cp-divider {
+  height: 3px;
+  background: var(--yellow);
+  margin: 0 32px 20px;
+}
+
+/* ── Certificate title ── */
+.cp-title {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--black-soft);
+  margin-bottom: 16px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ── Info table (bordered, top section) ── */
+.cp-info-table {
+  width: calc(100% - 64px);
+  margin: 0 32px 20px;
   border-collapse: collapse;
+  border: 1px solid #aaa;
+  font-size: 13px;
 }
 
-.preview-table tr {
-  border-bottom: 1px solid var(--gray-100);
-  transition: background var(--transition);
+.cp-info-table tr {
+  border-bottom: 1px solid #aaa;
 }
 
-.preview-table tr:hover {
-  background: var(--gray-50);
-}
-
-.preview-table tr:last-child {
+.cp-info-table tr:last-child {
   border-bottom: none;
 }
 
-.preview-table-label {
-  width: 40%;
-  padding: 13px 32px 13px 32px;
+.cp-info-label {
+  width: 200px;
+  padding: 9px 14px;
+  font-weight: 700;
+  color: var(--black-soft);
+  vertical-align: top;
+  border-right: 1px solid #aaa;
+  white-space: nowrap;
+}
+
+.cp-info-value {
+  padding: 9px 14px;
+  color: var(--black-soft);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.cp-multiline {
+  white-space: pre-line;
+}
+
+/* ── Section heading (underlined, like PDF) ── */
+.cp-section-heading {
+  margin: 0 32px 10px;
   font-size: 13px;
   font-weight: 700;
-  color: var(--gray-600);
-  text-transform: uppercase;
-  letter-spacing: .3px;
-  vertical-align: top;
-  border-right: 2px solid var(--gray-100);
-}
-
-.preview-table-value {
-  padding: 13px 32px;
-  font-size: 15px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
   color: var(--black-soft);
-  font-weight: 500;
 }
 
+/* ── Material table ── */
+.cp-material-table {
+  width: calc(100% - 64px);
+  margin: 0 32px 20px;
+  border-collapse: collapse;
+  border: 1px solid #aaa;
+  font-size: 13px;
+}
+
+.cp-material-table thead tr {
+  background: var(--yellow-light);
+}
+
+.cp-mat-th {
+  padding: 8px 12px;
+  font-weight: 700;
+  color: var(--black-soft);
+  border: 1px solid #aaa;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: .3px;
+}
+
+.cp-mat-th--num { width: 36px; }
+
+.cp-mat-td {
+  padding: 10px 12px;
+  border: 1px solid #aaa;
+  color: var(--black-soft);
+  vertical-align: top;
+  font-size: 13px;
+}
+
+.cp-mat-td--center { text-align: center; }
+
+/* ── Terms ── */
+.cp-terms {
+  margin: 0 32px 20px;
+  font-size: 12px;
+  color: var(--black-soft);
+  line-height: 1.65;
+}
+
+.cp-terms p {
+  margin-bottom: 10px;
+}
+
+.cp-terms p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Signature block ── */
+.cp-signature-block {
+  margin: 0 32px 0;
+  padding-bottom: 20px;
+}
+
+.cp-for-sunrack {
+  font-size: 13px;
+  color: #c8860a;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.cp-signature-img {
+  display: block;
+  height: 64px;
+  width: auto;
+  margin-bottom: 6px;
+  object-fit: contain;
+}
+
+.cp-auth-text {
+  font-size: 13px;
+  color: var(--black-soft);
+}
+
+/* ── Footer bar ── */
+.cp-footer-bar {
+  background: var(--white);
+  border-top: 2px solid var(--yellow);
+  padding: 10px 32px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--black-soft);
+  letter-spacing: .3px;
+}
+
+/* keep this for backward compat if referenced anywhere */
 .preview-empty {
   color: var(--gray-400);
   font-style: italic;
   font-weight: 400;
-}
-
-.preview-footer {
-  background: var(--black);
-  padding: 14px 32px;
-  border-top: 3px solid var(--yellow);
-}
-
-.preview-footer p {
-  color: rgba(255,255,255,.55);
-  font-size: 12px;
-  text-align: center;
-  letter-spacing: .3px;
 }
 
 /* ── Page footer ──────────────────────────────────────── */
