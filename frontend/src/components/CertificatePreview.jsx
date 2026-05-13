@@ -31,9 +31,7 @@ export default function CertificatePreview({ data }) {
         <div className="cp-header-left">
           S U N R A C K &nbsp; T E C H N O L O G I E S
         </div>
-        <div className="cp-header-logo">
-          <span className="cp-logo-sun">SUN</span><span className="cp-logo-rack">RACK</span>
-        </div>
+        <img src="/logo.svg" alt="Sunrack Logo" className="cp-header-logo-img" />
       </div>
       <div className="cp-divider" />
 

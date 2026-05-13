@@ -658,15 +658,11 @@ input[type="number"] { -moz-appearance: textfield; }
   text-transform: uppercase;
 }
 
-.cp-header-logo {
-  font-size: 32px;
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: 1px;
+.cp-header-logo-img {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
 }
-
-.cp-logo-sun { color: var(--black-soft); }
-.cp-logo-rack { color: var(--yellow); }
 
 /* ── Yellow divider ── */
 .cp-divider {
