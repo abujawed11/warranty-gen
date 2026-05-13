@@ -60,7 +60,19 @@ export default function App() {
 
   function handleDownload(e) {
     e.preventDefault()
-    alert('Backend PDF generation will be connected next.')
+    const f = document.createElement('form')
+    f.method = 'POST'
+    f.action = 'http://localhost:8001/api/download-certificate'
+    Object.entries(form).forEach(([key, value]) => {
+      const input = document.createElement('input')
+      input.type  = 'hidden'
+      input.name  = key
+      input.value = value || ''
+      f.appendChild(input)
+    })
+    document.body.appendChild(f)
+    f.submit()
+    document.body.removeChild(f)
   }
 
   return (
@@ -268,7 +280,7 @@ export default function App() {
               Preview Certificate
             </button>
             <button type="button" className="btn btn-secondary" onClick={handleDownload}>
-              <span className="btn-icon">&#11015;</span>
+              <span className="btn-icon">⬇</span>
               Download Certificate
             </button>
           </div>
