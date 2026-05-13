@@ -196,6 +196,254 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
+/* remove number input spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
+input[type="number"] { -moz-appearance: textfield; }
+
+/* ── Select ───────────────────────────────────────────── */
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239ca3af' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+/* ── Customer groups ──────────────────────────────────── */
+.customer-groups {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 4px;
+}
+
+.customer-group {
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  /* no overflow:hidden — allows country dropdown to escape the box */
+}
+
+.customer-group-title {
+  background: var(--gray-50);
+  border-bottom: 1.5px solid var(--gray-200);
+  padding: 10px 16px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--gray-800);
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* round only the top corners to match parent, since overflow:hidden is gone */
+  border-radius: calc(var(--radius-lg) - 1.5px) calc(var(--radius-lg) - 1.5px) 0 0;
+}
+
+.customer-group-fields {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* pincode sits next to state, pincode narrower */
+.address-row {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  gap: 12px;
+}
+
+/* extra top margin for the remaining cert fields row */
+.form-grid--mt {
+  margin-top: 20px;
+}
+
+/* ── Group dot indicator ──────────────────────────────── */
+.group-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.group-dot--yellow { background: var(--yellow); }
+.group-dot--black  { background: var(--black-soft); }
+
+/* ── Searchable country select ────────────────────────── */
+.search-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  gap: 8px;
+}
+
+.search-select-trigger--open {
+  border-color: var(--yellow);
+  box-shadow: 0 0 0 3px rgba(245, 194, 0, .18);
+}
+
+.search-select-value {
+  color: var(--black-soft);
+  font-size: 15px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.search-select-placeholder {
+  color: var(--gray-400);
+  font-size: 14px;
+  flex: 1;
+}
+
+.search-select-icons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.search-select-clear {
+  font-size: 11px;
+  color: var(--gray-400);
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 3px;
+  line-height: 1;
+  transition: color var(--transition), background var(--transition);
+}
+
+.search-select-clear:hover {
+  color: var(--black);
+  background: var(--gray-200);
+}
+
+.search-select-arrow {
+  flex-shrink: 0;
+  transition: transform var(--transition);
+  display: block;
+}
+
+.search-select-arrow--up {
+  transform: rotate(180deg);
+}
+
+/* Dropdown panel */
+.search-select-dropdown {
+  position: absolute;
+  z-index: 1000;
+  background: var(--white);
+  border: 1.5px solid var(--yellow);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  margin-top: 4px;
+  overflow: hidden;
+}
+
+/* the form-field needs relative so dropdown anchors correctly */
+.form-field {
+  position: relative;
+}
+
+.search-select-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--gray-200);
+  background: var(--gray-50);
+}
+
+.search-select-search-icon {
+  font-size: 14px;
+  color: var(--gray-400);
+  flex-shrink: 0;
+}
+
+.search-select-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: var(--black-soft);
+  font-family: inherit;
+}
+
+.search-select-search-input::placeholder {
+  color: var(--gray-400);
+}
+
+.search-select-search-clear {
+  font-size: 11px;
+  color: var(--gray-400);
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: color var(--transition);
+}
+
+.search-select-search-clear:hover { color: var(--black); }
+
+.search-select-list {
+  list-style: none;
+  padding: 4px 0;
+  margin: 0;
+  max-height: 210px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.search-select-list::-webkit-scrollbar { width: 5px; }
+.search-select-list::-webkit-scrollbar-track { background: transparent; }
+.search-select-list::-webkit-scrollbar-thumb {
+  background: var(--gray-200);
+  border-radius: 99px;
+}
+
+.search-select-option {
+  padding: 9px 14px;
+  font-size: 14px;
+  color: var(--gray-800);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background var(--transition);
+}
+
+.search-select-option:hover {
+  background: var(--yellow-light);
+}
+
+.search-select-option--selected {
+  background: var(--yellow-light);
+  font-weight: 600;
+  color: var(--black);
+}
+
+.search-select-check {
+  color: var(--yellow-dark);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.search-select-no-result {
+  padding: 14px;
+  font-size: 13px;
+  color: var(--gray-400);
+  text-align: center;
+  font-style: italic;
+}
+
 /* ── Action bar ───────────────────────────────────────── */
 .form-actions {
   padding: 24px 36px;
@@ -326,6 +574,50 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   text-align: right;
 }
 
+/* ── Preview customer groups ──────────────────────────── */
+.preview-customer-groups {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.preview-customer-block {
+  flex: 1;
+  padding: 20px 28px;
+}
+
+.preview-customer-block:first-child {
+  border-right: 1px solid var(--gray-200);
+}
+
+.preview-customer-heading {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  color: var(--gray-600);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 8px;
+}
+
+.preview-customer-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--black-soft);
+  margin-bottom: 4px;
+}
+
+.preview-customer-address {
+  font-size: 13px;
+  color: var(--gray-600);
+  line-height: 1.55;
+}
+
+.preview-customer-divider { display: none; }
+
+/* ── */
 .preview-section-title {
   background: var(--yellow-light);
   border-bottom: 2px solid var(--yellow);
@@ -436,6 +728,23 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
   .form-grid {
     grid-template-columns: 1fr;
+  }
+
+  .customer-groups {
+    grid-template-columns: 1fr;
+  }
+
+  .address-row {
+    grid-template-columns: 1fr 100px;
+  }
+
+  .preview-customer-groups {
+    flex-direction: column;
+  }
+
+  .preview-customer-block:first-child {
+    border-right: none;
+    border-bottom: 1px solid var(--gray-200);
   }
 
   .form-actions {

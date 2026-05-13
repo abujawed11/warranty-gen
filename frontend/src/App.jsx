@@ -1,13 +1,23 @@
 import { useState } from 'react'
 import FormInput from './components/FormInput'
+import FormSelect from './components/FormSelect'
+import FormSearchSelect from './components/FormSearchSelect'
 import CertificatePreview from './components/CertificatePreview'
 import './App.css'
 
 const INITIAL_FORM = {
   billingCustomerName: '',
-  billingCustomerAddress: '',
+  billingAddress: '',
+  billingState: '',
+  billingPincode: '',
+  billingCountry: '',
+
   shippingCustomerName: '',
-  shippingCustomerAddress: '',
+  shippingAddress: '',
+  shippingState: '',
+  shippingPincode: '',
+  shippingCountry: '',
+
   dateOfDispatch: '',
   invoicePONumber: '',
   warrantyPeriod: '',
@@ -51,41 +61,111 @@ export default function App() {
       <main className="page-main">
         <form className="cert-form" onSubmit={handlePreview} noValidate>
 
-          {/* Section 1 */}
+          {/* ── Section 1: Warranty Certificate Details ── */}
           <section className="form-section">
             <div className="section-header">
               <span className="section-badge">01</span>
               <h2 className="section-title">Warranty Certificate Details</h2>
             </div>
-            <div className="form-grid">
-              <FormInput
-                label="Billing Customer Name"
-                name="billingCustomerName"
-                value={form.billingCustomerName}
-                onChange={handleChange}
-                placeholder="Enter billing customer name"
-              />
-              <FormInput
-                label="Billing Customer Address"
-                name="billingCustomerAddress"
-                value={form.billingCustomerAddress}
-                onChange={handleChange}
-                placeholder="Enter billing address"
-              />
-              <FormInput
-                label="Shipping Customer Name"
-                name="shippingCustomerName"
-                value={form.shippingCustomerName}
-                onChange={handleChange}
-                placeholder="Enter shipping customer name"
-              />
-              <FormInput
-                label="Shipping Customer Address"
-                name="shippingCustomerAddress"
-                value={form.shippingCustomerAddress}
-                onChange={handleChange}
-                placeholder="Enter shipping address"
-              />
+
+            <div className="customer-groups">
+
+              {/* Billing Customer */}
+              <div className="customer-group">
+                <div className="customer-group-title">
+                  <span className="group-dot group-dot--yellow" />
+                  Billing Customer
+                </div>
+                <div className="customer-group-fields">
+                  <FormInput
+                    label="Full Name"
+                    name="billingCustomerName"
+                    value={form.billingCustomerName}
+                    onChange={handleChange}
+                    placeholder="Enter billing customer name"
+                  />
+                  <FormInput
+                    label="Address Line"
+                    name="billingAddress"
+                    value={form.billingAddress}
+                    onChange={handleChange}
+                    placeholder="Street / locality / area"
+                  />
+                  <div className="address-row">
+                    <FormSelect
+                      label="State"
+                      name="billingState"
+                      value={form.billingState}
+                      onChange={handleChange}
+                    />
+                    <FormInput
+                      label="Pincode"
+                      name="billingPincode"
+                      type="number"
+                      value={form.billingPincode}
+                      onChange={handleChange}
+                      placeholder="400001"
+                    />
+                  </div>
+                  <FormSearchSelect
+                    label="Country"
+                    name="billingCountry"
+                    value={form.billingCountry}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+
+              {/* Shipping Customer */}
+              <div className="customer-group">
+                <div className="customer-group-title">
+                  <span className="group-dot group-dot--black" />
+                  Shipping Customer
+                </div>
+                <div className="customer-group-fields">
+                  <FormInput
+                    label="Full Name"
+                    name="shippingCustomerName"
+                    value={form.shippingCustomerName}
+                    onChange={handleChange}
+                    placeholder="Enter shipping customer name"
+                  />
+                  <FormInput
+                    label="Address Line"
+                    name="shippingAddress"
+                    value={form.shippingAddress}
+                    onChange={handleChange}
+                    placeholder="Street / locality / area"
+                  />
+                  <div className="address-row">
+                    <FormSelect
+                      label="State"
+                      name="shippingState"
+                      value={form.shippingState}
+                      onChange={handleChange}
+                    />
+                    <FormInput
+                      label="Pincode"
+                      name="shippingPincode"
+                      type="number"
+                      value={form.shippingPincode}
+                      onChange={handleChange}
+                      placeholder="400001"
+                    />
+                  </div>
+                  <FormSearchSelect
+                    label="Country"
+                    name="shippingCountry"
+                    value={form.shippingCountry}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+
+            </div>
+
+            {/* Remaining certificate fields */}
+            <div className="form-grid form-grid--mt">
               <FormInput
                 label="Date of Dispatch"
                 name="dateOfDispatch"
@@ -110,7 +190,7 @@ export default function App() {
             </div>
           </section>
 
-          {/* Section 2 */}
+          {/* ── Section 2: Material Details ── */}
           <section className="form-section">
             <div className="section-header">
               <span className="section-badge">02</span>
@@ -127,6 +207,7 @@ export default function App() {
               <FormInput
                 label="Quantity (kWp)"
                 name="quantityKWp"
+                type="number"
                 value={form.quantityKWp}
                 onChange={handleChange}
                 placeholder="e.g. 100"
@@ -146,7 +227,7 @@ export default function App() {
             </div>
           </section>
 
-          {/* Actions */}
+          {/* ── Actions ── */}
           <div className="form-actions">
             <button type="submit" className="btn btn-primary">
               <span className="btn-icon">&#128065;</span>
@@ -157,6 +238,7 @@ export default function App() {
               Download Certificate
             </button>
           </div>
+
         </form>
 
         {showPreview && (
