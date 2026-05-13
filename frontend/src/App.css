@@ -44,7 +44,7 @@
 }
 
 .page-header-inner {
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 18px 24px;
   display: flex;
@@ -86,7 +86,7 @@
 /* ── Main content ─────────────────────────────────────── */
 .page-main {
   flex: 1;
-  max-width: 960px;
+  max-width: 1200px;
   width: 100%;
   margin: 0 auto;
   padding: 36px 24px 48px;
