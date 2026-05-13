@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem \"D:\\\\react\\\\warranty-input\\\\frontend\" -Force -Recurse | Select-Object FullName | Where-Object { $_.FullName -notmatch 'node_modules' })"
+    ]
+  }
+}
