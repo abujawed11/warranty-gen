@@ -341,8 +341,8 @@ def build_pdf(data: CertificateData) -> bytes:
     y -= 6
 
     # ── Signature block ──────────────────────────────────────
-    cv.setFont("Helvetica-Oblique", 10)
-    cv.setFillColor(C_ORANGE)
+    cv.setFont("Helvetica-BoldOblique", 10)
+    cv.setFillColor(C_BLACK)
     cv.drawString(ML, y, "For Sunrack Technologies")
     y -= 14
 

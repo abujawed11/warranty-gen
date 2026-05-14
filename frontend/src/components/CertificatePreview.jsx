@@ -93,7 +93,7 @@ export default function CertificatePreview({ data }) {
 
       {/* ── Signature block ── */}
       <div className="cp-signature-block">
-        {/* <p className="cp-for-sunrack">For Sunrack Technologies</p> */}
+        <p className="cp-for-sunrack">For Sunrack Technologies</p>
         <img src="/signature.png" alt="Authorised Signatory" className="cp-signature-img" />
         <p className="cp-auth-text">Authorised Signatory</p>
       </div>

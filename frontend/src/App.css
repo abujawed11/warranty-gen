@@ -790,8 +790,9 @@ input[type="number"] { -moz-appearance: textfield; }
 
 .cp-for-sunrack {
   font-size: 14px;
-  color: #c8860a;
+  color: #000000;
   font-style: italic;
+  font-weight: bold;
   margin-bottom: 8px;
 }
 
