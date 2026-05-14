@@ -189,7 +189,7 @@ def build_pdf(data: CertificateData) -> bytes:
             cv.drawImage(sig, ML, y - sig_disp_h,
                          width=sig_disp_w, height=sig_disp_h,
                          preserveAspectRatio=True, mask="auto")
-            y -= sig_disp_h + 6
+            y -= sig_disp_h + 18
         except Exception:
             y -= 10
 
