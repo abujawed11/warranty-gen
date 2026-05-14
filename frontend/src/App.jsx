@@ -62,7 +62,8 @@ export default function App() {
     e.preventDefault()
     const f = document.createElement('form')
     f.method = 'POST'
-    f.action = 'http://localhost:8001/api/download-certificate'
+    const base = import.meta.env.VITE_API_URL || ''
+    f.action = `${base}/api/download-certificate`
     Object.entries(form).forEach(([key, value]) => {
       const input = document.createElement('input')
       input.type  = 'hidden'
