@@ -259,7 +259,9 @@ def build_pdf_v2(data: CertificateData) -> bytes:
             sw, sh = si.getSize()
             sig_h = 52
             sig_w = round((sw / sh) * sig_h)
-            story.append(Image(sig, width=sig_w, height=sig_h))
+            img = Image(sig, width=sig_w, height=sig_h)
+            img.hAlign = 'LEFT'
+            story.append(img)
         except Exception:
             pass
 
