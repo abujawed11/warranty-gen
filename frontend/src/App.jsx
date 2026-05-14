@@ -20,7 +20,8 @@ const INITIAL_FORM = {
 
   dateOfDispatch: '',
   invoicePONumber: '',
-  warrantyPeriod: '',
+  warrantyNumber: '',
+  warrantyUnit: 'Years',
   materialPartName: '',
   quantityKWp: '',
   remarks: '',
@@ -64,7 +65,14 @@ export default function App() {
     f.method = 'POST'
     const base = import.meta.env.VITE_API_URL || ''
     f.action = `${base}/api/download-certificate`
-    Object.entries(form).forEach(([key, value]) => {
+    const payload = {
+      ...form,
+      warrantyPeriod: form.warrantyNumber ? `${form.warrantyNumber} ${form.warrantyUnit}` : '',
+    }
+    delete payload.warrantyNumber
+    delete payload.warrantyUnit
+
+    Object.entries(payload).forEach(([key, value]) => {
       const input = document.createElement('input')
       input.type  = 'hidden'
       input.name  = key
@@ -227,13 +235,30 @@ export default function App() {
                 onChange={handleChange}
                 placeholder="e.g. INV-2024-001"
               />
-              <FormInput
-                label="Warranty Period"
-                name="warrantyPeriod"
-                value={form.warrantyPeriod}
-                onChange={handleChange}
-                placeholder="e.g. 10 Years"
-              />
+              <div className="form-field">
+                <label className="form-label">Warranty Period</label>
+                <div className="warranty-period-input">
+                  <input
+                    className="form-input warranty-period-number"
+                    type="number"
+                    name="warrantyNumber"
+                    value={form.warrantyNumber}
+                    onChange={handleChange}
+                    placeholder="e.g. 10"
+                    min="1"
+                    autoComplete="off"
+                  />
+                  <select
+                    className="form-input warranty-period-unit"
+                    name="warrantyUnit"
+                    value={form.warrantyUnit}
+                    onChange={handleChange}
+                  >
+                    <option value="Months">Months</option>
+                    <option value="Years">Years</option>
+                  </select>
+                </div>
+              </div>
             </div>
           </section>
 

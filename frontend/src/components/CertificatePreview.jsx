@@ -59,7 +59,7 @@ export default function CertificatePreview({ data }) {
           </tr>
           <tr>
             <td className="cp-info-label">Warranty Period:</td>
-            <td className="cp-info-value">{data.warrantyPeriod ? `${data.warrantyPeriod} from the date of dispatch and as per the terms below` : '—'}</td>
+            <td className="cp-info-value">{data.warrantyNumber ? `${data.warrantyNumber} ${data.warrantyUnit} from the date of dispatch and as per the terms below` : '—'}</td>
           </tr>
         </tbody>
       </table>
