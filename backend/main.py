@@ -30,6 +30,8 @@ def generate_certificate_json(data: CertificateData):
 
 @app.post("/api/download-certificate")
 def generate_certificate_form(
+    certificateFormat:    str = Form("format1"),
+    # Format 1 fields
     billingCustomerName:  str = Form(""),
     billingAddress:       str = Form(""),
     billingState:         str = Form(""),
@@ -46,8 +48,21 @@ def generate_certificate_form(
     materialPartName:     str = Form(""),
     quantityKWp:          str = Form(""),
     remarks:              str = Form(""),
+    # Format 2 fields
+    f2ProjectName:        str = Form(""),
+    f2Client:             str = Form(""),
+    f2SolarConsultant:    str = Form(""),
+    f2SolarDeveloper:     str = Form(""),
+    f2MainContractor:     str = Form(""),
+    f2Location:           str = Form(""),
+    f2ProductDescription: str = Form(""),
+    f2ProductWarranty:    str = Form(""),
+    f2DesignWarranty:     str = Form(""),
+    f2WarrantyPeriodNote: str = Form(""),
+    f2DateOfIssue:        str = Form(""),
 ):
     data = CertificateData(
+        certificateFormat=certificateFormat,
         billingCustomerName=billingCustomerName,
         billingAddress=billingAddress,
         billingState=billingState,
@@ -64,6 +79,17 @@ def generate_certificate_form(
         materialPartName=materialPartName,
         quantityKWp=quantityKWp,
         remarks=remarks,
+        f2ProjectName=f2ProjectName,
+        f2Client=f2Client,
+        f2SolarConsultant=f2SolarConsultant,
+        f2SolarDeveloper=f2SolarDeveloper,
+        f2MainContractor=f2MainContractor,
+        f2Location=f2Location,
+        f2ProductDescription=f2ProductDescription,
+        f2ProductWarranty=f2ProductWarranty,
+        f2DesignWarranty=f2DesignWarranty,
+        f2WarrantyPeriodNote=f2WarrantyPeriodNote,
+        f2DateOfIssue=f2DateOfIssue,
     )
     return _pdf_response(data)
 
