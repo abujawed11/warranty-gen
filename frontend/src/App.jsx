@@ -3,9 +3,12 @@ import FormInput from './components/FormInput'
 import FormSelect from './components/FormSelect'
 import FormSearchSelect from './components/FormSearchSelect'
 import CertificatePreview from './components/CertificatePreview'
+import CertificatePreview2 from './components/CertificatePreview2'
 import './App.css'
 
 const INITIAL_FORM = {
+  certificateFormat: 'format1',
+
   billingCustomerName: '',
   billingAddress: '',
   billingState: '',
@@ -25,6 +28,19 @@ const INITIAL_FORM = {
   materialPartName: '',
   quantityKWp: '',
   remarks: '',
+
+  // Format 2 fields
+  f2ProjectName: '',
+  f2Client: '',
+  f2SolarConsultant: '',
+  f2SolarDeveloper: '',
+  f2MainContractor: '',
+  f2Location: '',
+  f2ProductDescription: '',
+  f2ProductWarranty: '',
+  f2DesignWarranty: '',
+  f2WarrantyPeriodNote: '',
+  f2DateOfIssue: '',
 }
 
 export default function App() {
@@ -65,12 +81,12 @@ export default function App() {
     f.method = 'POST'
     const base = import.meta.env.VITE_API_URL || ''
     f.action = `${base}/api/download-certificate`
-    const payload = {
-      ...form,
-      warrantyPeriod: form.warrantyNumber ? `${form.warrantyNumber} ${form.warrantyUnit}` : '',
-    }
+    const payload = { ...form }
     delete payload.warrantyNumber
     delete payload.warrantyUnit
+    if (form.certificateFormat !== 'format2') {
+      payload.warrantyPeriod = form.warrantyNumber ? `${form.warrantyNumber} ${form.warrantyUnit}` : ''
+    }
 
     Object.entries(payload).forEach(([key, value]) => {
       const input = document.createElement('input')
@@ -99,8 +115,21 @@ export default function App() {
       <main className="page-main">
         <form className="cert-form" onSubmit={handlePreview} noValidate>
 
-          {/* ── Section 1: Warranty Certificate Details ── */}
-          <section className="form-section">
+          {/* ── Format selector ── */}
+          <div className="format-selector-bar">
+            <span className="format-selector-label">Certificate Format:</span>
+            <label className={`format-option${form.certificateFormat === 'format1' ? ' format-option--active' : ''}`}>
+              <input type="radio" name="certificateFormat" value="format1" checked={form.certificateFormat === 'format1'} onChange={handleChange} />
+              Format 1 — Standard
+            </label>
+            <label className={`format-option${form.certificateFormat === 'format2' ? ' format-option--active' : ''}`}>
+              <input type="radio" name="certificateFormat" value="format2" checked={form.certificateFormat === 'format2'} onChange={handleChange} />
+              Format 2 — Detailed Project
+            </label>
+          </div>
+
+          {/* ── Section 1: Warranty Certificate Details (Format 1 only) ── */}
+          <section className="form-section" style={{ display: form.certificateFormat === 'format2' ? 'none' : undefined }}>
             <div className="section-header">
               <span className="section-badge">01</span>
               <h2 className="section-title">Warranty Certificate Details</h2>
@@ -262,8 +291,8 @@ export default function App() {
             </div>
           </section>
 
-          {/* ── Section 2: Material Details ── */}
-          <section className="form-section">
+          {/* ── Section 2: Material Details (Format 1 only) ── */}
+          <section className="form-section" style={{ display: form.certificateFormat === 'format2' ? 'none' : undefined }}>
             <div className="section-header">
               <span className="section-badge">02</span>
               <h2 className="section-title">Details of Material Supplied</h2>
@@ -299,6 +328,36 @@ export default function App() {
             </div>
           </section>
 
+          {/* ── Format 2 Section ── */}
+          {form.certificateFormat === 'format2' && (
+            <section className="form-section">
+              <div className="section-header">
+                <span className="section-badge">01</span>
+                <h2 className="section-title">Project Details</h2>
+              </div>
+              <div className="form-grid">
+                <FormInput label="Project Name" name="f2ProjectName" value={form.f2ProjectName} onChange={handleChange} placeholder="e.g. Solar Plant Phase 1" />
+                <FormInput label="Client" name="f2Client" value={form.f2Client} onChange={handleChange} placeholder="e.g. ABC Solar Pvt Ltd" />
+                <FormInput label="Solar Consultant" name="f2SolarConsultant" value={form.f2SolarConsultant} onChange={handleChange} placeholder="" />
+                <FormInput label="Solar Developer" name="f2SolarDeveloper" value={form.f2SolarDeveloper} onChange={handleChange} placeholder="" />
+                <FormInput label="Main Contractor" name="f2MainContractor" value={form.f2MainContractor} onChange={handleChange} placeholder="" />
+                <FormInput label="Location" name="f2Location" value={form.f2Location} onChange={handleChange} placeholder="e.g. Rajasthan, India" />
+              </div>
+
+              <div className="section-header" style={{ marginTop: '24px' }}>
+                <span className="section-badge">02</span>
+                <h2 className="section-title">Product &amp; Warranty Details</h2>
+              </div>
+              <div className="form-grid">
+                <FormInput label="Product Description" name="f2ProductDescription" value={form.f2ProductDescription} onChange={handleChange} placeholder="e.g. UX Long Rail with 25mm Strut Rail" />
+                <FormInput label="Product Warranty" name="f2ProductWarranty" value={form.f2ProductWarranty} onChange={handleChange} placeholder="e.g. 15 years" />
+                <FormInput label="Design Warranty" name="f2DesignWarranty" value={form.f2DesignWarranty} onChange={handleChange} placeholder="e.g. 25 years" />
+                <FormInput label="Warranty Period Note" name="f2WarrantyPeriodNote" value={form.f2WarrantyPeriodNote} onChange={handleChange} placeholder="e.g. STARTS FROM SHIPPING DATE." />
+                <FormInput label="Date of Issue" name="f2DateOfIssue" type="date" value={form.f2DateOfIssue} onChange={handleChange} />
+              </div>
+            </section>
+          )}
+
           {/* ── Actions ── */}
           <div className="form-actions">
             <button type="submit" className="btn btn-primary">
@@ -319,7 +378,10 @@ export default function App() {
               <h2>Certificate Preview</h2>
               <button className="btn-close" onClick={() => setShowPreview(false)} aria-label="Close preview">&#x2715;</button>
             </div>
-            <CertificatePreview data={form} />
+            {form.certificateFormat === 'format2'
+              ? <CertificatePreview2 data={form} />
+              : <CertificatePreview data={form} />
+            }
           </div>
         )}
       </main>

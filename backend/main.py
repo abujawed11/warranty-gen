@@ -6,6 +6,7 @@ from fastapi.responses import StreamingResponse
 
 from models import CertificateData
 from pdf_builder import build_pdf
+from pdf_builder_v2 import build_pdf_v2
 
 app = FastAPI()
 
@@ -67,16 +68,22 @@ def generate_certificate_form(
     return _pdf_response(data)
 
 
+def _first_word(name: str) -> str:
+    return name.strip().split()[0] if name.strip() else ""
+
+
 def _pdf_response(data: CertificateData):
-    pdf_bytes = build_pdf(data)
-
-    def first_word(name: str) -> str:
-        return (name.strip().split()[0]) if name.strip() else ""
-
-    billing  = first_word(data.billingCustomerName)  or "Unknown"
-    shipping = first_word(data.shippingCustomerName) or "Unknown"
-    po       = "".join(ch for ch in data.invoicePONumber if ch.isalnum() or ch in "_-").strip() or "NoPO"
-    filename = f"Warranty_Certificate_{billing}_{shipping}_{po}.pdf"
+    if data.certificateFormat == "format2":
+        pdf_bytes = build_pdf_v2(data)
+        client  = _first_word(data.f2Client) or "Unknown"
+        project = "".join(ch for ch in data.f2ProjectName if ch.isalnum() or ch in "_-").strip() or "NoProject"
+        filename = f"Warranty_Certificate_{client}_{project}.pdf"
+    else:
+        pdf_bytes = build_pdf(data)
+        billing  = _first_word(data.billingCustomerName)  or "Unknown"
+        shipping = _first_word(data.shippingCustomerName) or "Unknown"
+        po       = "".join(ch for ch in data.invoicePONumber if ch.isalnum() or ch in "_-").strip() or "NoPO"
+        filename = f"Warranty_Certificate_{billing}_{shipping}_{po}.pdf"
 
     return StreamingResponse(
         io.BytesIO(pdf_bytes),
