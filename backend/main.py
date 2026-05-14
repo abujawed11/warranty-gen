@@ -70,11 +70,13 @@ def generate_certificate_form(
 def _pdf_response(data: CertificateData):
     pdf_bytes = build_pdf(data)
 
-    safe = "".join(
-        ch for ch in (data.billingCustomerName or "Certificate")
-        if ch.isalnum() or ch in " _-"
-    ).strip() or "Certificate"
-    filename = f"Warranty_Certificate_{safe}.pdf"
+    def first_word(name: str) -> str:
+        return (name.strip().split()[0]) if name.strip() else ""
+
+    billing  = first_word(data.billingCustomerName)  or "Unknown"
+    shipping = first_word(data.shippingCustomerName) or "Unknown"
+    po       = "".join(ch for ch in data.invoicePONumber if ch.isalnum() or ch in "_-").strip() or "NoPO"
+    filename = f"Warranty_Certificate_{billing}_{shipping}_{po}.pdf"
 
     return StreamingResponse(
         io.BytesIO(pdf_bytes),
