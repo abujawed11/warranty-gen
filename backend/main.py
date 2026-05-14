@@ -321,22 +321,38 @@ def build_pdf(data: CertificateData) -> bytes:
     _draw_heading(cv, "Standard Terms & Conditions:", ML, y)
     y -= 14
 
+    # Available height = current y  minus  (sig block 86pt + footer clearance 68pt + loop tail 6pt)
+    SIG_H      = 86   # "For Sunrack"(14) + sig img(52+6) + "Authorised Signatory"(14)
+    FOOT_CLEAR = 68   # keeps "Authorised Signatory" baseline well above the footer line
+    available  = y - 6 - SIG_H - FOOT_CLEAR
+
+    # Measure all paragraphs at default leading to find total height
+    D_LEAD, D_GAP = 13.5, 7
+    para_hs = []
+    _ms = ParagraphStyle("ms", fontName="Helvetica", fontSize=9, leading=D_LEAD, textColor=C_BLACK)
+    for t in TERMS:
+        _, ph = Paragraph(t, _ms).wrap(CW, 500)
+        para_hs.append(ph)
+    total_h = sum(para_hs) + (len(para_hs) - 1) * D_GAP
+
+    # Scale leading + gap down only if needed (never below readable minimums)
+    if total_h > available > 0:
+        r    = available / total_h
+        lead = max(10.5, D_LEAD * r)
+        gap  = max(3,    D_GAP  * r)
+    else:
+        lead, gap = D_LEAD, D_GAP
+
     terms_style = ParagraphStyle(
-        "terms",
-        fontName="Helvetica",
-        fontSize=9,
-        leading=13.5,
-        textColor=C_BLACK,
+        "terms", fontName="Helvetica", fontSize=9,
+        leading=lead, textColor=C_BLACK,
     )
 
     for para_text in TERMS:
         para = Paragraph(para_text, terms_style)
         _, ph = para.wrap(CW, 500)
-        if y - ph < 90:          # page break if not enough room
-            cv.showPage()
-            y = page_h - 50
         para.drawOn(cv, ML, y - ph)
-        y -= ph + 7
+        y -= ph + gap
 
     y -= 6
 
