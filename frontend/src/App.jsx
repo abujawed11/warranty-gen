@@ -32,14 +32,14 @@ const INITIAL_FORM = {
   // Format 2 fields
   f2ProjectName: '',
   f2Client: '',
-  f2SolarConsultant: '',
-  f2SolarDeveloper: '',
-  f2MainContractor: '',
+  f2SolarConsultant: 'Roofsol Energy Pvt Ltd',
+  f2SolarDeveloper: 'Roofsol Energy Pvt Ltd',
+  f2MainContractor: 'Roofsol Energy Pvt Ltd',
   f2Location: '',
   f2ProductDescription: '',
-  f2ProductWarranty: '',
-  f2DesignWarranty: '',
-  f2WarrantyPeriodNote: '',
+  f2ProductWarranty: '15 years',
+  f2DesignWarranty: '25 years',
+  f2WarrantyPeriodNote: 'STARTS FROM SHIPPING DATE',
   f2DateOfIssue: '',
 }
 
