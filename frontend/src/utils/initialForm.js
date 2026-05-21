@@ -1,0 +1,35 @@
+export const INITIAL_FORM = {
+  certificateFormat: 'format1',
+
+  billingCustomerName: '',
+  billingAddress: '',
+  billingState: '',
+  billingPincode: '',
+  billingCountry: '',
+
+  shippingCustomerName: '',
+  shippingAddress: '',
+  shippingState: '',
+  shippingPincode: '',
+  shippingCountry: '',
+
+  dateOfDispatch: '',
+  invoicePONumber: '',
+  warrantyNumber: '',
+  warrantyUnit: 'Years',
+  materialPartName: '',
+  quantityKWp: '',
+  remarks: '',
+
+  f2ProjectName: '',
+  f2Client: '',
+  f2SolarConsultant: 'Roofsol Energy Pvt Ltd',
+  f2SolarDeveloper: 'Roofsol Energy Pvt Ltd',
+  f2MainContractor: 'Roofsol Energy Pvt Ltd',
+  f2Location: '',
+  f2ProductDescription: '',
+  f2ProductWarranty: '15 years',
+  f2DesignWarranty: '25 years',
+  f2WarrantyPeriodNote: 'STARTS FROM SHIPPING DATE',
+  f2DateOfIssue: '',
+}
