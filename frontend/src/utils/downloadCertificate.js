@@ -6,7 +6,7 @@ export function downloadCertificate(form) {
   const payload = { ...form }
   delete payload.warrantyNumber
   delete payload.warrantyUnit
-  if (form.certificateFormat !== 'format2') {
+  if (form.certificateFormat === 'format1') {
     payload.warrantyPeriod = form.warrantyNumber ? `${form.warrantyNumber} ${form.warrantyUnit}` : ''
   }
   Object.entries(payload).forEach(([key, value]) => {

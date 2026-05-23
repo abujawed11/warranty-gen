@@ -3,6 +3,7 @@ import Footer from './components/Footer'
 import FormatSelector from './components/FormatSelector'
 import Format1Form from './components/Format1Form'
 import Format2Form from './components/Format2Form'
+import Format3Form from './components/Format3Form'
 import FormActions from './components/FormActions'
 import PreviewSection from './components/PreviewSection'
 import { useWarrantyForm } from './hooks/useWarrantyForm'
@@ -40,6 +41,10 @@ export default function App() {
 
           {form.certificateFormat === 'format2' && (
             <Format2Form form={form} onChange={handleChange} />
+          )}
+
+          {form.certificateFormat === 'format3' && (
+            <Format3Form form={form} onChange={handleChange} />
           )}
 
           <FormActions onDownload={handleDownload} />

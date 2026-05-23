@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "PowerShell(Get-ChildItem \"D:\\\\react\\\\warranty-input\\\\frontend\" -Force -Recurse | Select-Object FullName | Where-Object { $_.FullName -notmatch 'node_modules' })",
-      "Bash(dir D:\\\\react\\\\warranty-input\\\\public *)"
+      "Bash(dir D:\\\\react\\\\warranty-input\\\\public *)",
+      "PowerShell(dir \"D:\\\\react\\\\warranty-input\\\\frontend\\\\src\" -Recurse | Where-Object {!$_.PSIsContainer} | Select-Object Name, FullName)",
+      "PowerShell(Get-ChildItem \"D:\\\\react\\\\warranty-input\\\\frontend\\\\src\" -Recurse | Where-Object {!$_.PSIsContainer} | Select-Object Name, FullName | Format-Table -AutoSize)"
     ]
   }
 }

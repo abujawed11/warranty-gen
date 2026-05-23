@@ -7,6 +7,7 @@ from fastapi.responses import StreamingResponse
 from models import CertificateData
 from pdf_builder import build_pdf
 from pdf_builder_v2 import build_pdf_v2
+from pdf_builder_test import build_pdf_test
 
 app = FastAPI()
 
@@ -60,6 +61,29 @@ def generate_certificate_form(
     f2DesignWarranty:     str = Form(""),
     f2WarrantyPeriodNote: str = Form(""),
     f2DateOfIssue:        str = Form(""),
+    # Format 3 fields
+    tcRefNumber:          str = Form(""),
+    tcDate:               str = Form(""),
+    tcCustomerName:       str = Form(""),
+    tcCustomerAddress:    str = Form(""),
+    tcCustomerGstin:      str = Form(""),
+    tcProjectName:        str = Form(""),
+    tcSupplierName:       str = Form("SUNRACK TECHNOLOGIES LLP"),
+    tcSupplierAddress:    str = Form("Flat no. 13 A/18 Krishna Gopal Krishna Nagar, Khairapada, Boisar, Dist. Palghar, Maharashtra-401501"),
+    tcSupplierGstin:      str = Form("27AEEFS1875H1ZR"),
+    tcPoNumber:           str = Form(""),
+    tcPoDate:             str = Form(""),
+    tcDispatchDate:       str = Form(""),
+    tcMaterialPartName:   str = Form(""),
+    tcQuantityKWp:        str = Form(""),
+    tcRemarks:            str = Form(""),
+    tcSi:                 str = Form(""),
+    tcMg:                 str = Form(""),
+    tcFe:                 str = Form(""),
+    tcOther:              str = Form(""),
+    tcAl:                 str = Form(""),
+    tcBHN:                str = Form(""),
+    tcHV10:               str = Form(""),
 ):
     data = CertificateData(
         certificateFormat=certificateFormat,
@@ -90,6 +114,28 @@ def generate_certificate_form(
         f2DesignWarranty=f2DesignWarranty,
         f2WarrantyPeriodNote=f2WarrantyPeriodNote,
         f2DateOfIssue=f2DateOfIssue,
+        tcRefNumber=tcRefNumber,
+        tcDate=tcDate,
+        tcCustomerName=tcCustomerName,
+        tcCustomerAddress=tcCustomerAddress,
+        tcCustomerGstin=tcCustomerGstin,
+        tcProjectName=tcProjectName,
+        tcSupplierName=tcSupplierName,
+        tcSupplierAddress=tcSupplierAddress,
+        tcSupplierGstin=tcSupplierGstin,
+        tcPoNumber=tcPoNumber,
+        tcPoDate=tcPoDate,
+        tcDispatchDate=tcDispatchDate,
+        tcMaterialPartName=tcMaterialPartName,
+        tcQuantityKWp=tcQuantityKWp,
+        tcRemarks=tcRemarks,
+        tcSi=tcSi,
+        tcMg=tcMg,
+        tcFe=tcFe,
+        tcOther=tcOther,
+        tcAl=tcAl,
+        tcBHN=tcBHN,
+        tcHV10=tcHV10,
     )
     return _pdf_response(data)
 
@@ -104,6 +150,11 @@ def _pdf_response(data: CertificateData):
         client  = _first_word(data.f2Client) or "Unknown"
         project = "".join(ch for ch in data.f2ProjectName if ch.isalnum() or ch in "_-").strip() or "NoProject"
         filename = f"Warranty_Certificate_{client}_{project}.pdf"
+    elif data.certificateFormat == "format3":
+        pdf_bytes = build_pdf_test(data)
+        customer = _first_word(data.tcCustomerName) or "Unknown"
+        po       = "".join(ch for ch in data.tcPoNumber if ch.isalnum() or ch in "_-").strip() or "NoPO"
+        filename = f"Test_Certificate_{customer}_{po}.pdf"
     else:
         pdf_bytes = build_pdf(data)
         billing  = _first_word(data.billingCustomerName)  or "Unknown"

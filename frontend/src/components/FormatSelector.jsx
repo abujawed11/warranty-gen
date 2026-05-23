@@ -10,6 +10,10 @@ export default function FormatSelector({ value, onChange }) {
         <input type="radio" name="certificateFormat" value="format2" checked={value === 'format2'} onChange={onChange} />
         Format 2 — Detailed Project
       </label>
+      <label className={`format-option${value === 'format3' ? ' format-option--active' : ''}`}>
+        <input type="radio" name="certificateFormat" value="format3" checked={value === 'format3'} onChange={onChange} />
+        Format 3 — Test Certificate
+      </label>
     </div>
   )
 }
