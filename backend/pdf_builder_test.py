@@ -235,7 +235,7 @@ def build_pdf_test(data: CertificateData) -> bytes:
         if i < len(col_w) - 1:
             cv.setStrokeColor(C_BORDER)
             cv.line(cx, y, cx, y - row_h)
-    y -= row_h + 12
+    y -= row_h + 24
 
     # ── Chemical Composition table ───────────────────────────────
     NUM_W  = 28
@@ -369,7 +369,7 @@ def build_pdf_test(data: CertificateData) -> bytes:
             cv.drawImage(sig, ML, y - sig_disp_h,
                          width=sig_disp_w, height=sig_disp_h,
                          preserveAspectRatio=True, mask="auto")
-            y -= sig_disp_h + 6
+            y -= sig_disp_h + 24
         except Exception:
             y -= 10
 
