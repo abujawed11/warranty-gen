@@ -10,7 +10,7 @@ from reportlab.platypus import Paragraph
 
 from constants import C_BLACK, C_BORDER, C_YELLOW, C_YELLOW_LIGHT
 from models import CertificateData
-from pdf_helpers import logo_path, sig_path
+from pdf_helpers import logo_path, sig_path, _asset
 
 
 def _fmt_date(date_str: str) -> str:
@@ -359,7 +359,7 @@ def build_pdf_test(data: CertificateData) -> bytes:
     cv.drawString(ML, y, "For Sunrack Technologies")
     y -= 14
 
-    sig = sig_path()
+    sig = _asset("Test_certificate_logo.png") or sig_path()
     if sig:
         try:
             si         = ImageReader(sig)
