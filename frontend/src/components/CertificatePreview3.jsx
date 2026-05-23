@@ -142,9 +142,11 @@ export default function CertificatePreview3({ data }) {
       </div>{/* end body */}
 
       {/* ── Footer ── */}
-      <div className="cp-footer-bar">
-        <span>SUNRACK TECHNOLOGIES LLP</span>
-        <span>BOISAR, PALGHAR</span>
+      <div className="cp-footer-bar" style={{ display: 'block', fontWeight: 700, color: '#4472C4'  }}>
+        <div>SUNRACK TECHNOLOGIES LLP</div>
+        <div>FLAT NO. 13 A/18 KRISHNA GOPAL KRISHNA NAGAR,</div>
+        <div> KHAIRAPADA, BOISAR, DIST. PALGHAR,</div>
+        <div>MAHARASHTRA-401501</div>
       </div>
 
     </div>

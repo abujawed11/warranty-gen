@@ -384,15 +384,16 @@ def build_pdf_test(data: CertificateData) -> bytes:
     cv.drawString(ML, y, "Note: Material conforms to IS: 733 – 1983")
 
     # ── Footer bar ───────────────────────────────────────────────
-    fy = 28
+    fy = 38
     cv.setStrokeColor(C_YELLOW)
     cv.setLineWidth(2)
     cv.line(ML, fy + 16, page_w - MR, fy + 16)
 
-    cv.setFont("Helvetica-Bold", 8.5)
+    cv.setFont("Helvetica-Bold", 8)
     cv.setFillColor(C_BLACK)
     cv.drawString(ML, fy,      "SUNRACK TECHNOLOGIES LLP")
-    cv.drawString(ML, fy - 11, "BOISAR, PALGHAR")
+    cv.drawString(ML, fy - 10, "FLAT NO. 13 A/18 KRISHNA GOPAL KRISHNA NAGAR, KHAIRAPADA, BOISAR, DIST. PALGHAR,")
+    cv.drawString(ML, fy - 20, "MAHARASHTRA-401501")
 
     cv.save()
     buf.seek(0)
