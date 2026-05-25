@@ -23,7 +23,7 @@ export default function App() {
 
   return (
     <div className="page">
-      <Navbar />
+      <Navbar certificateFormat={form.certificateFormat} />
 
       <main className="page-main">
         <form className="cert-form" onSubmit={handlePreview} noValidate>
