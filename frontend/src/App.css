@@ -365,6 +365,8 @@ input[type="number"] { -moz-appearance: textfield; }
   transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
   overflow: hidden;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
 }
 
 .cert-type-card:hover {
@@ -387,6 +389,7 @@ input[type="number"] { -moz-appearance: textfield; }
 
 .cert-type-card-header {
   width: 100%;
+  flex: 1;
   display: flex;
   align-items: flex-start;
   gap: 12px;
