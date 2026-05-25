@@ -92,7 +92,7 @@ export default function CertificatePreview3({ data }) {
         </table>
 
         {/* Chemical Composition */}
-        <table style={{ width: '100%', borderCollapse: 'collapse', border: '1px solid #aaa', marginBottom: 8, fontSize: '0.75rem' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', border: '1px solid #aaa', marginBottom: 24, marginTop: 24, fontSize: '0.75rem' }}>
           <tbody>
             <tr>
               <td style={{ width: 28, borderRight: '1px solid #aaa', borderBottom: '1px solid #aaa', padding: '4px 6px' }} />
@@ -114,7 +114,7 @@ export default function CertificatePreview3({ data }) {
         </table>
 
         {/* Mechanical Properties */}
-        <table style={{ width: '100%', borderCollapse: 'collapse', border: '1px solid #aaa', marginBottom: 16, fontSize: '0.75rem' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', border: '1px solid #aaa', marginBottom: 36, fontSize: '0.75rem' }}>
           <tbody>
             <tr style={{ fontWeight: 700 }}>
               {['#', 'Mechanical Properties', 'B.H.N', 'H.V 10'].map((h, i) => (

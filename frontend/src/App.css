@@ -333,49 +333,156 @@ input[type="number"] { -moz-appearance: textfield; }
   line-height: 1.3;
 }
 
-/* ── Format selector bar ─────────────────────────────── */
-.format-selector-bar {
+/* ── Certificate type selector ───────────────────────── */
+.cert-type-selector {
+  padding: 28px 36px 32px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.cert-type-heading {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--gray-600);
+  margin-bottom: 12px;
+}
+
+.cert-type-cards {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  background: var(--yellow-light, #FFF8D6);
-  border: 1.5px solid var(--yellow, #F5C200);
-  border-radius: var(--radius);
-  padding: 10px 16px;
-  margin-bottom: 8px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
-.format-selector-label {
+.cert-type-card {
+  flex: 1;
+  min-width: 220px;
+  max-width: 340px;
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  background: white;
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.cert-type-card:hover {
+  border-color: var(--gray-400);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.cert-type-card--open {
+  border-color: var(--yellow);
+  box-shadow: 0 0 0 3px rgba(245,194,0,.18), var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.cert-type-card--active {
+  border-color: var(--yellow);
+  box-shadow: 0 0 0 3px rgba(245,194,0,.18), var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.cert-type-card-header {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 18px 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--transition);
+}
+
+.cert-type-card--open .cert-type-card-header,
+.cert-type-card--active .cert-type-card-header {
+  background: var(--yellow-light);
+}
+
+.cert-type-card-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.cert-type-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--black-soft);
+  line-height: 1.2;
+}
+
+.cert-type-card-subtitle {
+  font-size: 12px;
+  color: var(--gray-600);
+  line-height: 1.4;
+}
+
+.cert-type-card-chevron {
+  font-size: 11px;
+  color: var(--gray-400);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.cert-type-card--open .cert-type-card-chevron {
+  color: var(--yellow-dark);
+}
+
+.cert-type-card-check {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--yellow-dark);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.cert-subformats {
+  display: flex;
+  gap: 10px;
+  padding: 12px 20px 18px;
+  border-top: 1.5px solid #fde68a;
+  background: #fffdf0;
+}
+
+.cert-subformat-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 12px;
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius);
+  background: white;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.cert-subformat-btn:hover {
+  border-color: var(--yellow);
+  background: var(--yellow-light);
+}
+
+.cert-subformat-btn--active {
+  border-color: var(--yellow-dark);
+  background: var(--yellow-light);
+}
+
+.cert-subformat-name {
   font-size: 13px;
   font-weight: 700;
   color: var(--black-soft);
-  margin-right: 4px;
 }
 
-.format-option {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--gray-600, #4b5563);
-  cursor: pointer;
-  padding: 5px 12px;
-  border-radius: var(--radius);
-  border: 1.5px solid transparent;
-  transition: all 0.15s;
-}
-
-.format-option input[type="radio"] {
-  accent-color: var(--yellow, #F5C200);
-}
-
-.format-option--active {
-  border-color: var(--yellow, #F5C200);
-  background: white;
-  color: var(--black-soft);
-  font-weight: 600;
+.cert-subformat-desc {
+  font-size: 11px;
+  color: var(--gray-600);
 }
 
 /* ── Format 2 two-page viewer ────────────────────────── */

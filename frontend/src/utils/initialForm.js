@@ -1,5 +1,5 @@
 export const INITIAL_FORM = {
-  certificateFormat: 'format1',
+  certificateFormat: '',
 
   billingCustomerName: '',
   billingAddress: '',

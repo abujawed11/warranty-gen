@@ -47,7 +47,7 @@ export default function App() {
             <Format3Form form={form} onChange={handleChange} />
           )}
 
-          <FormActions onDownload={handleDownload} />
+          {form.certificateFormat && <FormActions onDownload={handleDownload} />}
 
         </form>
 
