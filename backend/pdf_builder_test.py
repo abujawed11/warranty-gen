@@ -218,19 +218,28 @@ def build_pdf_test(data: CertificateData) -> bytes:
             cv.line(cx, y, cx, y - hdr_h)
     y -= hdr_h
 
+    part_style = ParagraphStyle("part", fontName="Helvetica", fontSize=9, leading=12, textColor=C_BLACK)
+    part_para  = Paragraph(data.tcMaterialPartName or "", part_style)
+    _, part_h  = part_para.wrap(col_w[1] - 8, 200)
+    row_h = max(24, int(part_h) + 12)
+
     cv.setFillColor(colors.white)
     cv.setStrokeColor(C_BORDER)
     cv.setLineWidth(0.5)
     cv.rect(ML, y - row_h, CW, row_h, fill=1)
 
-    mat_vals = ["1", data.tcMaterialPartName, data.tcQuantityKWp, data.tcRemarks]
+    mat_vals = ["1", None, data.tcQuantityKWp, data.tcRemarks]
     cx = ML
     for i, (w, v) in enumerate(zip(col_w, mat_vals)):
-        v = v or ""
-        cv.setFont("Helvetica", 10)
-        cv.setFillColor(C_BLACK)
-        vw = cv.stringWidth(v, "Helvetica", 10)
-        cv.drawString(cx + w / 2 - vw / 2, y - row_h + 8, v)
+        if i == 1:
+            bottom = y - row_h + (row_h - part_h) / 2
+            part_para.drawOn(cv, cx + 4, bottom)
+        else:
+            v = v or ""
+            cv.setFont("Helvetica", 9)
+            cv.setFillColor(C_BLACK)
+            vw = cv.stringWidth(v, "Helvetica", 9)
+            cv.drawString(cx + w / 2 - vw / 2, y - row_h / 2 - 4, v)
         cx += w
         if i < len(col_w) - 1:
             cv.setStrokeColor(C_BORDER)
